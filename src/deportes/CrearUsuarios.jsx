@@ -18,7 +18,7 @@ export const CompCreateUser = () => {
     const store = async (e) => {
         e.preventDefault()
         await axios.post(URI, {correo:correo, nomuser: nomuser, password: password})
-        navigate('/login')
+        navigate('/users')
     }   
 
     return (
