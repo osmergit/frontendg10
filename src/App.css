@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #3cea300b;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -77,8 +77,22 @@
 }
 .btn-register:hover,.btn-register:active{
   color:#fff;
-  background-color: #47e1ae;
-  border-color:#10B981
+  background-color: #6062493d;
+  border-color:#b910ae
 ;
 }
+section {
+  color: #fff;
+
+  background-color: #f1f3d93d;
+  font-weight: normal;
+  height: 200vh;
+}
+.navBg {
+  background-color: #bfa4e7;
+  font-weight: lighter;
+  font-size: large;
+  color:#ffb6b9b0;
+}
+
 

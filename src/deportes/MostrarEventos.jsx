@@ -1,12 +1,24 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import Table from 'react-bootstrap/Table'
 
 const URI = 'http://localhost:8000/usuarios/shevents'
 const URI2 = 'http://localhost:8000/usuarios/delevent/'
 
 export const CompShowEventos= () => {
-    
+const token1 = localStorage.getItem("auth")
+const token = `${token1}`;
+const beer = "Bearer"
+let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'accept': 'application/json',
+      //'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njk0NjcxMzgsImV4cCI6MTY2OTQ2ODkzOH0.Dp0FfAN_taNOtPRhOGeAB7nQZvMvzVddPhN4TKb3JJo',
+     'Authorization': `${beer} ${token}`,
+    }
+};
+
     const [ceventos, setEventos] = useState([])
    
     useEffect( ()=>{
@@ -15,7 +27,7 @@ export const CompShowEventos= () => {
 
     //procedimineto para mostrar todos los registros
     const getBlogs = async () => {
-        const res = await axios.get(URI)
+        const res = await axios.get(URI,axiosConfig)
         setEventos(res.data)
     }
 
@@ -26,12 +38,12 @@ export const CompShowEventos= () => {
     }
 
     return(
-        <div className='container'>
-            <div className='row'>
-                <div className='col'>
+        <div >
+            <div >
+                <div >
                     <Link to="/regevento" className='btn btn-primary mt-2 mb-2'><i className="fas fa-plus"></i>Crear Evento Deportivo</Link>
-                    <table className='table'>
-                        <thead className='thead tr:first-child'>
+                    <Table striped bordered hover size="sm" >
+                        <thead >
                             <tr>
                                 <th>Fecha</th>
                                 <th>Equipo 1</th>
@@ -57,7 +69,7 @@ export const CompShowEventos= () => {
                                 </tr>
                             )) }
                         </tbody>
-                    </table>
+                    </Table>
                 </div>    
             </div>
         </div>

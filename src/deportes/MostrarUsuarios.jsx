@@ -1,11 +1,24 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
-
+import Table from 'react-bootstrap/Table'
 const URI = 'http://localhost:8000/usuarios/shuser/'
 
 
 export const CompShowUsers = () => {
+
+    const token1 = localStorage.getItem("auth")
+const token = `${token1}`;
+const beer = "Bearer"
+
+let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'accept': 'application/json',
+     // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Z57-5Z11leFfQS8qBytP88FNdtvshyQQhuvJvBTNE0w',
+     'Authorization': `${beer} ${token}`,
+    }
+};
     
     const [users, setBlog] = useState([])
    
@@ -15,7 +28,7 @@ export const CompShowUsers = () => {
 
     //procedimineto para mostrar todos los registros
     const getBlogs = async () => {
-        const res = await axios.get(URI)
+        const res = await axios.get(URI,axiosConfig)
         setBlog(res.data)
     }
 
@@ -26,16 +39,16 @@ export const CompShowUsers = () => {
     }
 
     return(
-        <div className='container'>
-            <div className='row'>
-                <div className='col'>
-                    <Link to="/create" className='btn btn-primary mt-2 mb-2'><i className="fas fa-plus"></i>crear</Link>
-                    <table className='table'>
-                        <thead className='thead tr:first-child'>
+        <div >
+            <div >
+                <div >
+                    <Link to="/create" className=''>crear</Link>
+                    <Table striped bordered hover>
+                        <thead >
                             <tr>
                                 <th>Nombre</th>
                                 <th>Correo</th>
-                                <th>Password</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +56,7 @@ export const CompShowUsers = () => {
                                 <tr key={ blog._id}>
                                     <td > { blog.nomuser } </td>
                                     <td > { blog.correo } </td>
-                                    <td > { blog.password } </td>
+                                   
                                     <td>
                                         <Link to={`/edit/${blog._id}`} className=''><i className="fas fa-edit"></i>edit</Link>
                                         <button onClick={ ()=>deleteBlog(blog._id) } className='btn btn-danger'><i className="fas fa-trash-alt"></i>Eliminar</button>
@@ -51,7 +64,7 @@ export const CompShowUsers = () => {
                                 </tr>
                             )) }
                         </tbody>
-                    </table>
+                    </Table>
                 </div>    
             </div>
         </div>
