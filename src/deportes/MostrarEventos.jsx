@@ -2,7 +2,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import Table from 'react-bootstrap/Table'
-
+import Swal from 'sweetalert2';
 const URI = 'http://localhost:8000/usuarios/shevents'
 const URI2 = 'http://localhost:8000/usuarios/delevent/'
 
@@ -33,8 +33,27 @@ let axiosConfig = {
 
     //procedimineto para eliminar un registro
     const deleteBlog = async (_id) => {
-       await axios.delete(`${URI2}${_id}`)
-       getBlogs()
+        //insertar la validación con Alert
+
+      
+       Swal.fire({
+        title: 'Advertencia',
+        text: 'Esta ud seguro de eliminar el evento?',
+        icon: 'question',
+        showDenyButton: true,
+        denyButtonText: "NO",
+        confirmButtonText: "SI",
+       }).then(response => {
+        if(response.isConfirmed){
+            axios.delete(`${URI2}${_id}`)
+            Swal.fire("El evento se elimino con exito")
+            getBlogs()
+        }else{
+            Swal.fire("Seleccione el evento a eliminar")
+        }
+       })
+
+       
     }
 
     return(

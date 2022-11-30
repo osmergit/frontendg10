@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 //import '../../src/style.css';
 //import '../style.css';
-
+import Swal from 'sweetalert2'
 const URI = 'http://localhost:8000/usuarios/reguser'
 
 
@@ -16,7 +16,22 @@ export const CompCreateUser = () => {
     
     //procedimiento guardar
     const store = async (e) => {
+
         e.preventDefault()
+        Swal.fire({
+            title: 'Usted desea guardar los cambios?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Guardar',
+            denyButtonText: `No guardar`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire('Guardado!', '', 'exitoso')
+            } else if (result.isDenied) {
+              Swal.fire('Los cambios no fueron guardados', '', 'info')
+            }
+          })
         await axios.post(URI, {correo:correo, nomuser: nomuser, password: password})
         navigate('/users')
     }   

@@ -1,6 +1,10 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 //import '../../src/style.css';
 //import '../style.css';
 
@@ -19,14 +23,21 @@ export const CompCrearEvento = () => {
     //procedimiento guardar
     const store = async (e) => {
         e.preventDefault()
+        
+        Swal.clickConfirm("Información almacenada con exito")
         await axios.post(URI, {fecha: fecha, equipo1: equipo1, equipo2: equipo2, marcador1: marcador1, marcador2: marcador2, tipoevento: tipoevento})
+        Swal.fire("El archivo se guardo de manera exitosa")
+       
         navigate('/sheventos')
     }   
 
     return (
         <div className="login-form">
-           <h3>Creación de Eventos Deportivos</h3>
            
+           
+    <Card style={{ width: '30rem' }}>
+      <Card.Body>
+      <h3>Creación de Eventos Deportivos</h3>
            <form onSubmit={store}>
                 <div>
                     <input
@@ -79,6 +90,8 @@ export const CompCrearEvento = () => {
                 
                  <button type="submit" className="btn-register">Guardar</button>                  
            </form>
+           </Card.Body>
+    </Card>
         </div>
     )
 }

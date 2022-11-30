@@ -82,17 +82,17 @@
 ;
 }
 section {
-  color: #fff;
+  color: rgb(175, 225, 24);
 
-  background-color: #f1f3d93d;
+  background-color: #c9970b3d;
   font-weight: normal;
   height: 200vh;
 }
 .navBg {
-  background-color: #bfa4e7;
+  background-color: #CD5C5C;
   font-weight: lighter;
   font-size: large;
-  color:#ffb6b9b0;
+  color:#e90d74b0;
 }
 
 

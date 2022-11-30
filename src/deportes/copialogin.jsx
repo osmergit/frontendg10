@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
 //import styles from "./styles.module.css";
 
 
@@ -12,17 +11,15 @@ import Card from 'react-bootstrap/Card';
 export const Login = () => {
 
     useEffect ( ()=>{
-       //mostraralert()
+       // mostraralert()
         },[])
 
         const mostraralert = () => {
             Swal.fire({
                 title: 'Su correo y contraseña son correctos',
                 text: 'Ud desea continuar',
-                icon: 'warning',
-                showDenyButton: "NO",
-                confirmButtonText: "SI",
-                
+                icon: 'ok',
+                confirmButtonText: 'Continuar'
                
               })
         }
@@ -85,18 +82,10 @@ export const Login = () => {
 
 	return (
 		
-        <div className="login-form" >
-       <h3>Login</h3>
-        <Card>
-      <Card.Body>
-     
-        <Card>
-      <Card.Body>
-      
-         
+        <div >
+        <h3>Login</h3>
          <Form >
-         <Form.Group className="mb-3" controlId="formBasicEmail">
-             <Form.Control
+             <input
                
                  autoFocus
                  type= "text"
@@ -105,25 +94,17 @@ export const Login = () => {
                  onChange= { inputChange }
                  name= "correo"
              />
-           </Form.Group>
-           <Form.Group className="mb-3" controlId="formBasicPassword">
-             <Form.Control type="password"
+             <input type="password"
                  placeholder = "Password"
                  value={body.password}
                  onChange={inputChange}
                  name="password"
              />
-             </Form.Group>
-             <Button variant="secondary" onClick={onSubmit} type="submit" >
+             <button onClick={onSubmit} type="submit" >
                  Sign In
-             </Button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <Button as="a" variant="warning"> <Link to="/create" >Sign Up</Link> </Button>
-            
+             </button>
+             <Link to="/create" >Sign Up</Link>
          </Form>
-         </Card.Body>
-         </Card>
-         </Card.Body>
-    </Card>
      </div>
 
 	);
